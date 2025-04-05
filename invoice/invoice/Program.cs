@@ -1,10 +1,15 @@
 using invoice.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    var connectionsString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(connectionsString);
+});
 
 
 var app = builder.Build();
