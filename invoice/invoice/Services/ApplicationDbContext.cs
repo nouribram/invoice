@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using invoice.models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace invoice.Services
 {
@@ -6,7 +8,10 @@ namespace invoice.Services
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) 
         {
+           
         }
+
+        public DbSet<Invoice> Invoices { get; set; } = null!;
 
     }
 }
