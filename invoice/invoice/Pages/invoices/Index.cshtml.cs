@@ -3,13 +3,13 @@ using invoice.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace invoice.Pages.invoices
+namespace invoice.Pages.Invoices
 {
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext context;
 
-        public List<Invoice> invoiceLList = new();
+        public List<Invoice> invoiceList = [];
 
         public IndexModel(ApplicationDbContext context)
         {
@@ -17,7 +17,7 @@ namespace invoice.Pages.invoices
         }
         public void OnGet()
         {
-            invoiceLList = context.Invoices.ToList();
+            invoiceList = context.Invoices.OrderByDescending(i => i.Id).ToList();
         }
     }
 }
