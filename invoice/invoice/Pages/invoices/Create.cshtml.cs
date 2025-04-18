@@ -11,5 +11,13 @@ namespace invoice.Pages.invoices
         public void OnGet()
         {
         }
+
+        public void OnPost() 
+        { 
+            if (ModelState.IsValid)
+            {
+                return;
+            }
+        }
     }
 }
