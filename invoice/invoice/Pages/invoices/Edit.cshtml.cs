@@ -38,6 +38,43 @@ namespace invoice.Pages.invoices
             InvoiceDto.Email = invoice.Email;
             InvoiceDto.Phone = invoice.Phone;
             InvoiceDto.Address = invoice.Address;
+
+            return Page();
+        }
+
+        public string successMessage = "";
+
+        public IActionResult OnPost(int id) 
+        {
+            var invoice = context.Invoices.Find(id);
+            if (invoice == null) 
+            {
+                return RedirectToPage("/Invoices/Index");
+            }
+
+            Invoice = invoice;
+
+            if (!ModelState.IsValid) 
+            {
+                return Page();
+            }
+
+            invoice.Number = InvoiceDto.Number;
+            invoice.Status = InvoiceDto.Status;
+            invoice.IssueDate = InvoiceDto.IssueDate;
+            invoice.DueDate = InvoiceDto.DueDate;
+
+            invoice.Service = InvoiceDto.Service;
+            invoice.unitPrice = InvoiceDto.unitPrice;
+            invoice.Quantity = InvoiceDto.Quantity;
+            invoice.ClientName = InvoiceDto.ClientName;
+            invoice.Email = InvoiceDto.Email;
+            invoice.Phone = InvoiceDto.Phone;
+            invoice.Address = InvoiceDto.Address;
+
+            context.SaveChanges();
+            successMessage = "Invoice update successfully";
+            return Page();
         }
     }
 }
