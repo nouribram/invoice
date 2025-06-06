@@ -93,5 +93,15 @@ namespace DA_S.Controllers
 
             return View(diaryEntry);
         }
+
+        [HttpPost]
+        public IActionResult Delete(DiaryEntry Obj)
+        {
+                _db.DiaryEntries.Remove(Obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+           
+        }
+
     }
 }
